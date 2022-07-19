@@ -37,9 +37,9 @@ type Config struct {
 type ResolverRoot interface {
 	Mutation() MutationResolver
 	Query() QueryResolver
-	__Directive() __DirectiveResolver
-	__Schema() __SchemaResolver
-	__Type() __TypeResolver
+	Directive() DirectiveResolver
+	Schema() SchemaResolver
+	Type() TypeResolver
 }
 
 type DirectiveRoot struct {
@@ -92,13 +92,13 @@ type QueryResolver interface {
 	Courses(ctx context.Context) ([]*model.Course, error)
 	Chapters(ctx context.Context) ([]*model.Chapter, error)
 }
-type __DirectiveResolver interface {
+type DirectiveResolver interface {
 	IsRepeatable(ctx context.Context, obj *introspection.Directive) (bool, error)
 }
-type __SchemaResolver interface {
+type SchemaResolver interface {
 	Description(ctx context.Context, obj *introspection.Schema) (*string, error)
 }
-type __TypeResolver interface {
+type TypeResolver interface {
 	SpecifiedByURL(ctx context.Context, obj *introspection.Type) (*string, error)
 }
 
@@ -1392,7 +1392,7 @@ func (ec *executionContext) ___Directive_isRepeatable(ctx context.Context, field
 	ctx = graphql.WithFieldContext(ctx, fc)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.__Directive().IsRepeatable(rctx, obj)
+		return ec.resolvers.Directive().IsRepeatable(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1899,7 +1899,7 @@ func (ec *executionContext) ___Schema_description(ctx context.Context, field gra
 	ctx = graphql.WithFieldContext(ctx, fc)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.__Schema().Description(rctx, obj)
+		return ec.resolvers.Schema().Description(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -2405,7 +2405,7 @@ func (ec *executionContext) ___Type_specifiedByURL(ctx context.Context, field gr
 	ctx = graphql.WithFieldContext(ctx, fc)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.__Type().SpecifiedByURL(rctx, obj)
+		return ec.resolvers.Type().SpecifiedByURL(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)

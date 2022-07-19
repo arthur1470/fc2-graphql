@@ -11,27 +11,27 @@ import (
 	"github.com/arthur1470/fc2-graphql/graph/generated"
 )
 
-func (r *__DirectiveResolver) IsRepeatable(ctx context.Context, obj *introspection.Directive) (bool, error) {
+func (r *DirectiveResolver) IsRepeatable(ctx context.Context, obj *introspection.Directive) (bool, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *__SchemaResolver) Description(ctx context.Context, obj *introspection.Schema) (*string, error) {
+func (r *SchemaResolver) Description(ctx context.Context, obj *introspection.Schema) (*string, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *__TypeResolver) SpecifiedByURL(ctx context.Context, obj *introspection.Type) (*string, error) {
+func (r *TypeResolver) SpecifiedByURL(ctx context.Context, obj *introspection.Type) (*string, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
 // __Directive returns generated.__DirectiveResolver implementation.
-func (r *Resolver) __Directive() generated.__DirectiveResolver { return &__DirectiveResolver{r} }
+func (r *Resolver) __Directive() generated.DirectiveResolver { return &DirectiveResolver{r} }
 
 // __Schema returns generated.__SchemaResolver implementation.
-func (r *Resolver) __Schema() generated.__SchemaResolver { return &__SchemaResolver{r} }
+func (r *Resolver) __Schema() generated.SchemaResolver { return &SchemaResolver{r} }
 
 // __Type returns generated.__TypeResolver implementation.
-func (r *Resolver) __Type() generated.__TypeResolver { return &__TypeResolver{r} }
+func (r *Resolver) __Type() generated.TypeResolver { return &TypeResolver{r} }
 
-type __DirectiveResolver struct{ *Resolver }
-type __SchemaResolver struct{ *Resolver }
-type __TypeResolver struct{ *Resolver }
+type DirectiveResolver struct{ *Resolver }
+type SchemaResolver struct{ *Resolver }
+type TypeResolver struct{ *Resolver }
